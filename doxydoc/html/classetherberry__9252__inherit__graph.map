@@ -1,0 +1,4 @@
+<map id="etherberry_9252" name="etherberry_9252">
+<area shape="rect" id="node1" title="Initialization of the chip." alt="" coords="7,80,137,107"/>
+<area shape="rect" id="node2" href="$classraspicomm__base.html" title="This is the base class for the Pi and SPI communication." alt="" coords="5,5,139,32"/>
+</map>

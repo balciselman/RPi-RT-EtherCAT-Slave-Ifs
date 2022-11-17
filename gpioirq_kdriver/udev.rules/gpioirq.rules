@@ -1,0 +1,13 @@
+# udev rules file at /etc/udev/rules.d/gpioirq.rules
+# rules for hpdaq FPGA driver
+# on add driver create character dev
+# on remove driver remove character dev 
+# allow members of group xenomai write access to the device
+# create group xenomai with GID 5000 and add standard user and root to the group
+KERNEL=="gpioirq",NAME="gpioirq",SYMLINK+="gpioirq",GROUP="xenomai",MODE="0666"
+ACTION=="add",SUBSYSTEM=="module",KERNEL=="gpioirq",RUN+="/bin/mknod -m 666 /dev/gpioirq c 90 0"
+ACTION=="remove",SUBSYSTEM=="module",KERNEL=="gpioirq",RUN+="/bin/rm -f /dev/gpioirq*"
+
+
+
+

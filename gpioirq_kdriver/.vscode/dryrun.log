@@ -1,0 +1,10 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/mnt/data/projects/etherslave/irq_kernel_drv'
+make -C /lib/modules/5.15.32-rt39-v8-bb-custom/build M=/mnt/data/projects/etherslave/irq_kernel_drv  modules 
+g++ -IC -o /projects/etherslave/user_space_test/test_prog /projects/etherslave/user_space_test/test.cpp
+mkdir -p /lib/modules/5.15.32-rt39-v8-bb-custom/gpioirq
+cp -f gpioirq.ko /lib/modules/5.15.32-rt39-v8-bb-custom/gpioirq
+depmod
+/mnt/data/projects/etherslave/irq_kernel_drv/chk_rulefile.sh
+make: Leaving directory '/mnt/data/projects/etherslave/irq_kernel_drv'
+ 

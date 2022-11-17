@@ -1,0 +1,317 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 4.3
+# Built for aarch64-unknown-linux-gnu
+# Copyright (C) 1988-2020 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+
+# Make data base, printed on Thu Jul 28 09:25:23 2022
+
+# Variables
+
+# environment
+LC_ALL = C
+# environment
+VSCODE_CWD = /root
+# environment
+TEXTDOMAIN = Linux-PAM
+# default
+MAKE_COMMAND := make
+# environment
+VSCODE_HANDLES_SIGPIPE = true
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# default
+.VARIABLES := 
+# makefile (from 'Makefile', line 13)
+PWD := /mnt/data/projects/etherslave/irq_kernel_drv 
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# environment
+OLDPWD = /root/.vscode-server/bin/3b889b090b5ad5793f524b5d1d39fda662b96a2a
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# automatic
+%F = $(notdir $%)
+# environment
+LANG = C
+# default
+.LOADED := 
+# default
+.INCLUDE_DIRS = /usr/local/include /usr/include /usr/include
+# makefile
+MAKEFLAGS = pqrR
+# makefile
+CURDIR := /mnt/data/projects/etherslave/irq_kernel_drv
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+MFLAGS = -pqrR
+# default
+.SHELLFLAGS := -c
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# makefile (from 'Makefile', line 18)
+DEPMOD = depmod
+# makefile (from 'Makefile', line 1)
+MAKEFILE_LIST := Makefile
+# automatic
+@F = $(notdir $@)
+# environment
+XDG_SESSION_TYPE = tty
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# automatic
+*F = $(notdir $*)
+# makefile (from 'Makefile', line 5)
+KVER = $(shell uname -r)
+# environment
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/0/bus
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en","availableLanguages":{}}
+# default
+MAKE_HOST := aarch64-unknown-linux-gnu
+# makefile
+SHELL = /bin/sh
+# default
+MAKECMDGOALS := all
+# environment
+SHLVL = 0
+# environment
+MAKELEVEL := 0
+# makefile (from 'Makefile', line 17)
+APPDIR = /projects/etherslave/user_space_test
+# default
+MAKE = $(MAKE_COMMAND)
+# environment
+PATH = /root/.vscode-server/bin/3b889b090b5ad5793f524b5d1d39fda662b96a2a/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+# default
+MAKEFILES := 
+# environment
+LANGUAGE = en_US.UTF-8
+# environment
+MOTD_SHOWN = pam
+# automatic
+^F = $(notdir $^)
+# environment
+SSH_CLIENT = 10.33.197.192 63770 22
+# automatic
+?F = $(notdir $?)
+# automatic
++F = $(notdir $+)
+# 'override' directive
+GNUMAKEFLAGS := 
+# environment
+BROWSER = /root/.vscode-server/bin/3b889b090b5ad5793f524b5d1d39fda662b96a2a/bin/helpers/browser.sh
+# environment
+LOGNAME = root
+# makefile
+.DEFAULT_GOAL := all
+# environment
+USER = root
+# default
+MAKE_VERSION := 4.3
+# 'override' directive
+.SHELLSTATUS := 0
+# environment
+VSCODE_AGENT_FOLDER = /root/.vscode-server
+# environment
+_ = /root/.vscode-server/bin/3b889b090b5ad5793f524b5d1d39fda662b96a2a/node
+# environment
+XDG_RUNTIME_DIR = /run/user/0
+# makefile (from 'Makefile', line 9)
+obj-m = gpioirq.o 
+# environment
+VSCODE_IPC_HOOK_CLI = /run/user/0/vscode-ipc-1ee783b5-f0cd-4474-b245-02fd68c43a72.sock
+# makefile (from 'Makefile', line 7)
+cdir = $(shell pwd)
+# environment
+XDG_SESSION_CLASS = user
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+HOME = /root
+# makefile (from 'Makefile', line 19)
+CHKRULE = $(cdir)/chk_rulefile.sh
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# environment
+XDG_SESSION_ID = 6
+# default
+.RECIPEPREFIX := 
+# automatic
+<F = $(notdir $<)
+# makefile (from 'Makefile', line 16)
+APPTARGET = /projects/etherslave/user_space_test/test_prog
+# default
+SUFFIXES := 
+# makefile (from 'Makefile', line 15)
+TARGET = gpioirq.ko
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink load
+# makefile (from 'Makefile', line 14)
+MODDIR = /lib/modules/$(KVER)/gpioirq
+# environment
+SSH_CONNECTION = 10.33.197.192 63770 10.33.197.157 22
+# variable set hash-table stats:
+# Load=75/1024=7%, Rehash=0, Collisions=1/139=1%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (device 2052, inode 786448): 22 files, no impossibilities.
+
+# 22 files, no impossibilities in 1 directories.
+
+# Implicit Rules
+
+# No implicit rules.
+
+# Files
+
+/lib/modules/5.15.32-rt39-v8-bb-custom/gpioirq/gpioirq.ko: gpioirq.ko
+#  Implicit rule search has not been done.
+#  Last modified 2022-07-27 16:56:42.720222043
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 45):
+	mkdir -p $(MODDIR)
+	cp -f $(TARGET) $(MODDIR)
+	$(DEPMOD)
+	
+
+# Not a target:
+/projects/etherslave/user_space_test/test.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-26 18:28:23
+#  File has been updated.
+#  Successfully updated.
+
+gpioirq.ko: gpioirq.c
+#  Implicit rule search has not been done.
+#  Last modified 2022-07-27 16:56:42.176234221
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 35):
+	make -C /lib/modules/$(KVER)/build M=$(PWD) modules 
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-26 18:34:03
+#  File has been updated.
+#  Successfully updated.
+
+clean:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 50):
+	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
+	- rm $(APPTARGET)
+
+/projects/etherslave/user_space_test/test_prog: /projects/etherslave/user_space_test/test.cpp
+#  Implicit rule search has not been done.
+#  Last modified 2022-07-27 16:56:42.708222311
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 31):
+		g++ -IC -o $(APPTARGET) $(APPDIR)/test.cpp
+
+# 'override' directive
+rules: .SHELLSTATUS := 0
+rules:
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: ''
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := rules
+# automatic
+# * := 
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=9/32=28%, Rehash=0, Collisions=6/17=35%
+#  recipe to execute (from 'Makefile', line 41):
+		$(CHKRULE)
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+all: build install rules
+#  Command line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/8=0%
+
+build: gpioirq.ko /projects/etherslave/user_space_test/test_prog
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Successfully updated.
+
+install: /lib/modules/5.15.32-rt39-v8-bb-custom/gpioirq/gpioirq.ko
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+ 
+gpioirq.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-26 17:48:44
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# files hash-table stats:
+# Load=13/1024=1%, Rehash=0, Collisions=0/40=0%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 34 / storage = 501 B / avg = 14 B
+# current buf: size = 8162 B / used = 501 B / count = 34 / avg = 14 B
+
+# strcache performance: lookups = 57 / hit rate = 40%
+# hash-table stats:
+# Load=34/8192=0%, Rehash=0, Collisions=0/57=0%
+# Finished Make data base on Thu Jul 28 09:25:24 2022
+
+ 
