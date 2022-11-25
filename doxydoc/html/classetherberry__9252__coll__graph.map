@@ -1,6 +1,0 @@
-<map id="etherberry_9252" name="etherberry_9252">
-<area shape="rect" id="node1" title="Initialization of the chip." alt="" coords="74,243,203,269"/>
-<area shape="rect" id="node2" href="$classraspicomm__base.html" title="This is the base class for the Pi and SPI communication." alt="" coords="5,153,139,180"/>
-<area shape="rect" id="node3" href="$union_p_r_o_c_b_u_f_f_e_r.html" title=" " alt="" coords="17,5,127,32"/>
-<area shape="rect" id="node4" href="$classinterruptif.html" title="Interrupt Interface class." alt="" coords="163,153,250,180"/>
-</map>

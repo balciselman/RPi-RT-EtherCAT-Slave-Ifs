@@ -1,4 +1,0 @@
-<map id="CRTCLASS_mutex" name="CRTCLASS_mutex">
-<area shape="rect" id="node1" title="This class implements a mutex ( binary semaphore )" alt="" coords="21,80,158,107"/>
-<area shape="rect" id="node2" href="$class_c_r_t_c_l_a_s_s__basemutex.html" title="This class is a base locking mutex ( binary semaphore )" alt="" coords="5,5,173,32"/>
-</map>

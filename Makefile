@@ -8,13 +8,16 @@
 
 
 jobs = $(shell nproc)
+LIBDIR= ./lib
 
 
+all:	create_libdir build_rpi_base build_rt_utilities build_shield_9252 build_thread build_gpioirq_kdriver build_slave_test
 
-all:	build_rpi_base build_rt_utilities build_shield_9252 build_thread build_gpioirq_kdriver build_slave_test
+clean:	clean_libdir clean_rpi_base clean_rt_utilities clean_shield_9252 clean_thread clean_gpioirq_kdriver clean_slave_test
 
-clean:	clean_rpi_base clean_rt_utilities clean_shield_9252 clean_thread clean_gpioirq_kdriver clean_slave_test
 
+clean_libdir:
+	rm -rf $(LIBDIR)
 
 clean_rpi_base:		
 	@( echo "###################################" ; echo "# cleaning rpi_base ... _________#"; echo "###################################" )
@@ -56,6 +59,11 @@ clean_slave_test:
 
 
 
+
+
+create_libdir:
+	mkdir -p $(LIBDIR)
+
 build_rpi_base:							
 	@( echo "###################################" ; echo "# building rpi_base ... _________#"; echo "###################################" )
 	make -j $(jobs) -C ./rpi_base all
@@ -84,7 +92,7 @@ build_thread:
 
 build_gpioirq_kdriver:							
 	@( echo "###################################" ; echo "# building gpioirq_kdriver ... _________#"; echo "###################################" )
-	make -j $(jobs) -C ./gpioirq_kdriver all
+	make  -C ./gpioirq_kdriver all
 	@( echo "###################################" ; echo "# building gpioirq_kdriver done ________#"; echo "###################################" )
 
 

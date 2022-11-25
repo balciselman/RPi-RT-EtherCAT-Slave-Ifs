@@ -15,8 +15,8 @@ PWD := $(cdir)
 MODDIR=/lib/modules/$(KVER)/gpioirq
 INCDIR=../include/gpioirq/
 TARGET=gpioirq.ko
-APPTARGET = /projects/rt-ethercatslave/gpioirq_kdriver
-APPDIR = /projects/rt-ethercatslave/gpioirq_kdriver/user_space_test
+APPDIR = ./user_space_test
+APPTARGET = $(APPDIR)/test
 DEPMOD = depmod
 CHKRULE = $(cdir)/chk_rulefile.sh
 

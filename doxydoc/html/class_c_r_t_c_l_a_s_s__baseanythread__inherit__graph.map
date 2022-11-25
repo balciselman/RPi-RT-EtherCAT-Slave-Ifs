@@ -1,8 +1,0 @@
-<map id="CRTCLASS_baseanythread" name="CRTCLASS_baseanythread">
-<area shape="rect" id="node1" title="This class implements a generic thread, also created externel." alt="" coords="65,80,257,107"/>
-<area shape="rect" id="node3" href="$class_c_r_t_c_l_a_s_s__basethread.html" title="This class implements a thread." alt="" coords="77,155,245,181"/>
-<area shape="rect" id="node2" href="$class_c_r_t_c_l_a_s_s__baseobj.html" title="This is the base of all thread classes." alt="" coords="88,5,235,32"/>
-<area shape="rect" id="node4" href="$class_c_r_t_c_l_a_s_s__rtthread.html" title="This class implements a thread." alt="" coords="5,229,152,256"/>
-<area shape="rect" id="node5" href="$class_c_r_t_c_l_a_s_s__thread.html" title="This class implements a thread." alt="" coords="177,229,314,256"/>
-<area shape="rect" id="node6" href="$classtestthread.html" title="Test thread." alt="" coords="201,304,290,331"/>
-</map>

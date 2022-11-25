@@ -1,7 +1,0 @@
-<map id="testthread" name="testthread">
-<area shape="rect" id="node1" title="Test thread." alt="" coords="57,304,146,331"/>
-<area shape="rect" id="node2" href="$class_c_r_t_c_l_a_s_s__thread.html" title="This class implements a thread." alt="" coords="33,229,170,256"/>
-<area shape="rect" id="node3" href="$class_c_r_t_c_l_a_s_s__basethread.html" title="This class implements a thread." alt="" coords="17,155,185,181"/>
-<area shape="rect" id="node4" href="$class_c_r_t_c_l_a_s_s__baseanythread.html" title="This class implements a generic thread, also created externel." alt="" coords="5,80,197,107"/>
-<area shape="rect" id="node5" href="$class_c_r_t_c_l_a_s_s__baseobj.html" title="This is the base of all thread classes." alt="" coords="28,5,175,32"/>
-</map>

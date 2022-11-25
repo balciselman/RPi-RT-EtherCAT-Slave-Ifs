@@ -24,8 +24,8 @@
 /**********************************************************************************/
 
 
-//#include "/projects/etherslave/etherberry_9252/include/gpioirq/gpioirq.h"
-#include "../include/gpioirq/gpioirq.h"
+#define KERNEL_SPACE
+#include "../include/gpioirq/gpioirq.h" 
 
 /// Global Interrupt number initialization
 short int irq_any_gpio    = 0;
