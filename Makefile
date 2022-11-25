@@ -11,11 +11,17 @@ jobs = $(shell nproc)
 LIBDIR= ./lib
 
 
-all:	create_libdir build_rpi_base build_rt_utilities build_shield_9252 build_thread build_gpioirq_kdriver build_slave_test
+all:	create_libdir build_rpi_base build_rt_utilities build_shield_9252 build_thread build_gpioirq_kdriver build_slave_test LDCONFIG
 
 clean:	clean_libdir clean_rpi_base clean_rt_utilities clean_shield_9252 clean_thread clean_gpioirq_kdriver clean_slave_test
 
 
+
+LDCONFIG:			
+	@( echo "######### create ld.so.conf.d/ethercatslave.conf ##########################" )
+	@( echo $(realpath $(LIBDIR)) > /etc/ld.so.conf.d/ethercatslave.conf )
+	ldconfig
+	
 clean_libdir:
 	rm -rf $(LIBDIR)
 
