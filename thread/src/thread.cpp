@@ -1,3 +1,26 @@
+/**********************************************************************************/
+/*                                                                                */
+/* thread.cpp: Thread creation and priority adjustments                           */
+/*                                                                                */
+/**********************************************************************************/
+/* This program is free software; you can redistribute it and/or modify it        */
+/* under the terms of the GNU General Public License as published by the Free     */
+/* Software Foundation; either version 2 of the License, or (at your option)      */
+/* any later version.                                                             */
+/*                                                                                */
+/* This program is distributed in the hope that it will be useful, but WITHOUT    */
+/* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or          */
+/* FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for      */
+/* more details.                                                                  */
+/*                                                                                */
+/* You should have received a copy of the GNU General Public License along with   */
+/* this program; if not, see <http://www.gnu.org/licenses/>.                      */
+/**********************************************************************************/
+/* Author:                                                                        */
+/* S.Balci Moehwald GmbH - 2022                                                   */
+/* Supervised by:                                                                 */
+/* B.Benner Moehwald GmbH                                                         */
+/**********************************************************************************/
 
 
 #include "ethercatslave.h"
@@ -120,7 +143,7 @@ try_again:
 
 
 
-threadbase::threadbase(const char* name, int priority, void* ref, int cpu, bool crrunning, unsigned int stacksize) : genericthread(name)
+threadbase::threadbase(const char* name, int priority, void* ref, int cpu, bool crrunning, unsigned int stacksize) : genericthread()
 {
     m_isrt = 0;
     m_priority = priority;
@@ -139,15 +162,14 @@ threadbase::~threadbase()
 
 unsigned int threadbase::ExecThread(void* ref)
 {
-
-
     unsigned int stat;
+    struct sched_param schedp;
     
+    memset(&schedp, 0, sizeof(schedp));
+        
     if (m_isrt)
     {
-        struct sched_param schedp;
-
-        memset(&schedp, 0, sizeof(schedp));
+        
         schedp.sched_priority = m_priority;
         if (setscheduler(0, SCHED_FIFO, &schedp))
             printf("thread: failed to set priority to %d\n", m_priority);
@@ -223,7 +245,7 @@ thread::thread(const char* name, int priority, void* ref, int cpu, bool crrunnin
 
   
 
-  //sys.registerthread(this);
+//  sys.registerthread(this);
   if (stacksize == 0)
   {
       stacksize = 128 * 1024;
@@ -292,7 +314,7 @@ thread::~thread()
     imp_buf = NULL;
   }
   m_activ = false;
-  //sys.unregisterthread(this);
+ // sys.unregisterthread(this);
 }
 
 bool thread::Terminate()
@@ -372,7 +394,7 @@ void genericthread::register_this_thread()
 
     namebuf[sizeof(namebuf) - 1] = 0;
     snprintf(&namebuf[0], sizeof(namebuf) - 1, "%llu", (unsigned long long)(id));
-    //ms_threadlist.add(this, (unsigned long long)(id));                              sb:!!!!
+ //   ms_threadlist.add(this, (unsigned long long)(id));                             // sb:!!!!
 #if defined(__GNUC__)
     // name the thread
     cname=fix_threadname(Name(), &namebuf[0], sizeof(namebuf) - 1);
@@ -420,7 +442,7 @@ rtthread::rtthread(const char* name,int priority,void* ref,int cpu,bool crrunnin
 	  pthread_attr_setstacksize(&attr, (size_t)(stacksize));
   }
 
-  // only for preempt_rt
+  // for preempt_rt
   pthread_attr_setschedpolicy(&attr, SCHED_FIFO);
   pthread_attr_setschedparam(&attr,&schparam);
   cpu_set_t cpus;
@@ -603,7 +625,7 @@ mutex::~mutex()
         imp_buf = NULL;
         imp_buf_size = 0;
     }
-    //sys.unregistermutex(this);
+ //   sys.unregistermutex(this);
 }
 
 
@@ -647,8 +669,8 @@ void mutex::reset()
 
 // Thread
 
-
-	rttestthread::rttestthread(etherberry_9252* device) : rtthread("rttestthread",80,NULL,-1,false,0)
+// Priority set to 98!
+	rttestthread::rttestthread(etherberry_9252* device) : rtthread("rttestthread",88,NULL,-1,false,0)
 	{
       m_device=device;
      

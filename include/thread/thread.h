@@ -46,7 +46,7 @@ class genericthread : public baseobj
 
 	public:
 		/*! A constructor.	*/
-		genericthread(const char* name)
+		genericthread()
 		{}
 		/*! A destructor. */
 		virtual ~genericthread()

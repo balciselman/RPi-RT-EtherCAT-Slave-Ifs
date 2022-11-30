@@ -1,3 +1,26 @@
+/**********************************************************************************/
+/*                                                                                */
+/* shield_9252: Microchip LAN9252 integrated shield differentiation source        */
+/*                                                                                */
+/**********************************************************************************/
+/* This program is free software; you can redistribute it and/or modify it        */
+/* under the terms of the GNU General Public License as published by the Free     */
+/* Software Foundation; either version 2 of the License, or (at your option)      */
+/* any later version.                                                             */
+/*                                                                                */
+/* This program is distributed in the hope that it will be useful, but WITHOUT    */
+/* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or          */
+/* FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for      */
+/* more details.                                                                  */
+/*                                                                                */
+/* You should have received a copy of the GNU General Public License along with   */
+/* this program; if not, see <http://www.gnu.org/licenses/>.                      */
+/**********************************************************************************/
+/* Author:                                                                        */
+/* S.Balci Moehwald GmbH - 2022                                                   */
+/* Supervised by:                                                                 */
+/* B.Benner Moehwald GmbH                                                         */
+/**********************************************************************************/
 
 
 
@@ -150,6 +173,7 @@ int  etherberry_9252::do_initirq()
   if (m_devhndl == -1)                                    
   {
       fprintf(stderr,"Opening was not possible!\n");
+      fprintf(stderr,"run:modprobe gpioirq\n");
       err=-27;
       return err;
   }
@@ -162,11 +186,12 @@ int  etherberry_9252::do_initirq()
 unsigned int etherberry_9252::execute_fromthread()
 {
     int err = 0;
-    int timeoutms=100;                            
+    int timeoutms=100;                      
 
     unsigned long long start_run;
 	  unsigned long long period;
-
+    bool statreset = false;
+    
 
     while (1)
       {  
@@ -177,16 +202,27 @@ unsigned int etherberry_9252::execute_fromthread()
             }
             
             start_run = Getns();
+            /*
+            if (statreset == false)
+            {
+              if(start_run>2000000000)
+              {
+                m_runtime.reset();
+                statreset = true;
+              }
+             
+            }
+            */
 
-            bcm2835_gpio_set(OUT);
+            bcm2835_gpio_set(OUT);          // for oscilloscope masuring can be commented
             MainTask();     
-            bcm2835_gpio_clr(OUT);
+            bcm2835_gpio_clr(OUT);          // for oscilloscope masuring can be commented
             
             m_lastruntime = Getns() - start_run;
             if (m_count > 1)
             {
               period = start_run - m_laststart;
-              m_runtime.calc((double)(m_lastruntime * 1E-3));
+              m_runtime.calc((double)(m_lastruntime) * 1E-3);
               m_period.calc((double)(period) * 1E-6);
             }
             m_count += 1;

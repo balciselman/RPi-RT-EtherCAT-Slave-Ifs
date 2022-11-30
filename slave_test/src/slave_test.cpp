@@ -1,28 +1,32 @@
+/**********************************************************************************/
+/*                                                                                */
+/* slave_test.cpp: main for the slave interface                                   */
+/*                                                                                */
+/**********************************************************************************/
+/* This program is free software; you can redistribute it and/or modify it        */
+/* under the terms of the GNU General Public License as published by the Free     */
+/* Software Foundation; either version 2 of the License, or (at your option)      */
+/* any later version.                                                             */
+/*                                                                                */
+/* This program is distributed in the hope that it will be useful, but WITHOUT    */
+/* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or          */
+/* FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for      */
+/* more details.                                                                  */
+/*                                                                                */
+/* You should have received a copy of the GNU General Public License along with   */
+/* this program; if not, see <http://www.gnu.org/licenses/>.                      */
+/**********************************************************************************/
+/* Author:                                                                        */
+/* S.Balci Moehwald GmbH - 2022                                                   */
+/* Supervised by:                                                                 */
+/* B.Benner Moehwald GmbH                                                         */
+/**********************************************************************************/
 
-/*
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <bcm2835.h>
-#include <string.h>
-#include <time.h>
-#include <termios.h>  //sb
-#include <random>
-
-#include<sys/ioctl.h>
-#include <pthread.h>
-#include <linux/gpio.h>
-
-#include <wiringPi.h>
-*/
-//#include "cspitarget/cspitarget.h"	
 
 
 #include "ethercatslave.h"
 
 ////////////////////////////////////////// For long long random numbers
-// should this be solved with inline function!!??
   /* Seed */
   std::random_device rd;
   /* Random number generator */
@@ -49,15 +53,16 @@ PROCBUFFER  BufferfromEthCAT;
 int main(int argc, char* argv[])
 {
   int status;
-  unsigned long long before, loopstartms, loopstartns;
-  unsigned long long beforems;
+  unsigned long long loopstartms, loopstartns;
+//unsigned long long before, beforems;
   unsigned long long counter = 0;
   unsigned long long inputbuffer[4];
-  long long rest;
-  const unsigned long long onems_inns=1000000;
+//long long rest;
+//const unsigned long long onems_inns=1000000;
 
   //---- initialize the EtherC board -----
 
+  memset(&inputbuffer[0],0,sizeof(inputbuffer));
 
   status=ETHB.init();
     if (status!=0)
@@ -70,7 +75,7 @@ int main(int argc, char* argv[])
 
   
   //#define USE_THIS
-	
+	/*
   #if defined(USE_THIS)
   struct timespec tim;
   tim.tv_sec = 0;
@@ -86,7 +91,7 @@ int main(int argc, char* argv[])
      printf("period(us): %lld\n",period);
   }
   #endif
-
+*/
   mytestthread.Resume();                   /// Activating the thread!
 	
 
@@ -100,11 +105,13 @@ int main(int argc, char* argv[])
 
     inputbuffer[0] = loopstartms;
     inputbuffer[1] = counter;                         // counter at the second position
+    //inputbuffer[2] = distribution(generator);
+    //inputbuffer[3] = distribution(generator);
+    inputbuffer[2] = 1;
+    inputbuffer[3] = 2;
     counter++;
-   // inputbuffer[2] = distribution(generator);
-   // inputbuffer[3] = distribution(generator);
      
-    ETHB.send_output(&inputbuffer[0],sizeof(inputbuffer)/sizeof(inputbuffer[0]));
+    ETHB.send_output(&inputbuffer[0]);
 
     ETHB.bashoutput(); 
 /*

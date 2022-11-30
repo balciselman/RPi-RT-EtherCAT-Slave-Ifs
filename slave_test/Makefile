@@ -2,29 +2,42 @@
 #											  #
 #											  #
 # Makefile to build Etherslave source files   #
-# Debug is always active, will be integrated  #
-# once the system stabilized				  #
+#											  #
 ###############################################
 
 
 
 OBJS=
+OBJSDBG=
 OBJSAPP=
 LIBS=
+LIBSDBG=
 cdir=$(shell pwd)
 
 SRCDIR= ./src
 LIBDIR= ../lib
-###################################TESTDIR= ./??
 OBJDIR= ./obj
 INCDIR= ../include
 
+
+DEPS := $(OBJDIR)/*.d
+
+-include $(DEPS)
+
+
 TARGET=slave_test
+TARGET_DBG=slave_test_dbg
 
 TARGETNAME=$(LIBDIR)/lib$(TARGET).so
+TARGETNAME_DBG=$(LIBDIR)/lib$(TARGET_DBG).so
+
 APPTEST = ../ethercatslaveif
+APPTEST_DBG = ../ethercatslaveif_dbg
+
 
 LIBS += $(TARGETNAME)
+
+LIBSDBG += $(TARGETNAME_DBG)
 
 # Header Files
 H_FILES=$(shell ls ../include/*.h)
@@ -32,9 +45,10 @@ H_FILES=$(shell ls ../include/*.h)
 CC1 := gcc
 CC := g++
 
-LINKLIBS=-lpthread -lrt -lbcm2835 -ldl
-LINKLIBSALL=-lpthread -lrt -lbcm2835 -ldl -lrpi_base -lrt_utilities -lshield_9252 -lslave_test -lthread
+LINKLIBS=-lpthread -lrt -lbcm2835 -ldl -L $(LIBDIR)
 
+LINKLIBSALL=$(LINKLIBS) -lrpi_base -lrt_utilities -lshield_9252 -lslave_test -lthread
+LINKLIBSALL_DBG=$(LINKLIBS) -lrpi_base_dbg -lrt_utilities_dbg -lshield_9252_dbg -lslave_test_dbg -lthread_dbg
 
 CPPCOMMON =  -shared -pthread -g3 -Wall -Wextra -fPIC  -MMD -MP -Wno-unused-parameter -fmessage-length=0 -finput-charset=utf-8 -fexec-charset=utf-8 
 CPPRELEASE = -O2 -DNDEBUG 
@@ -45,7 +59,11 @@ CPPEXTRADBG = $(CPPCOMMON) $(CPPDEBUG) -I $(INCDIR)
 
 
 
-all:		build
+all:	build
+
+
+debug:	builddbg
+
 
 clean:
 	rm -rf $(OBJDIR)/
@@ -53,37 +71,56 @@ clean:
 	rm -f $(APPTEST)
 	@( echo "gpioirq module is removed" ; /usr/sbin/rmmod gpioirq )
 
+cleandbg:
+	rm -rf $(OBJDIR)/
+	rm -f $(TARGETNAME_DBG)
+	rm -f $(APPTEST_DBG)
+	@( echo "gpioirq module is removed" ; /usr/sbin/rmmod gpioirq )
+
 
 build:	$(OBJDIR) $(LIBS) $(APPTEST)
+
+
+builddbg:	$(OBJDIR) $(LIBSDBG) $(APPTEST_DBG)
+
 
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
 
 
+OBJS+=$(OBJDIR)/slave_test.o
+
+OBJSDBG+=$(OBJDIR)/slave_test_dbg.o
+
+
 # implicit rule
 $(OBJDIR)/%.o:		$(SRCDIR)/%.cpp $(H_FILES)
+	$(CC) -c $(CPPEXTRA) $< -o $@
+
+
+# implicit rule
+$(OBJDIR)/%_dbg.o:		$(SRCDIR)/%.cpp $(H_FILES)
 	$(CC) -c $(CPPEXTRADBG) $< -o $@
 
-
-OBJS+=$(OBJDIR)/slave_test.o
-#OBJS+=$(OBJDIR)/rpi_base.o
-#OBJS+=$(OBJDIR)/rt_utilities.o
-#OBJS+=$(OBJDIR)/shield_9252.o
-#OBJS+=$(OBJDIR)/thread.o
 
 
 $(LIBS) :		$(OBJS) 
 	$(CC) -shared -o $@ $(OBJS) $(LINKLIBS)
 
 
+$(LIBSDBG) :		$(OBJSDBG) 
+	$(CC) -shared -o $@ $(OBJSDBG) $(LINKLIBS)
+
 
 
 
 $(APPTEST) : 	$(OBJS)
-		@( echo "ldconfig..." ; /usr/sbin/ldconfig)
 		@( echo "gpioirq module is added" ; /usr/sbin/modprobe gpioirq )
-		$(CC) -o $@ $< -L $(LIBDIR) $(LINKLIBSALL) 
+		$(CC) $< -o $@ $(LINKLIBSALL) 
 
 
-#		$(CC) -I $(H_FILES) -L $(LIBDIR) $(SRCDIR)/slave_test.cpp -o $(APPTEST) $(LINKLIBS) -l $(TARGET)  
+$(APPTEST_DBG) : 	$(OBJSDBG)
+		@( echo "gpioirq module is added" ; /usr/sbin/modprobe gpioirq )
+		$(CC) $< -o $@ $(LINKLIBSALL_DBG) 
+

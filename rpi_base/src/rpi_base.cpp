@@ -1,6 +1,6 @@
 /**********************************************************************************/
 /*                                                                                */
-/* cspitarget.cpp    ??                                                           */
+/* rpi_base: Base initilization and communication source                          */
 /*                                                                                */
 /**********************************************************************************/
 /* This program is free software; you can redistribute it and/or modify it        */
@@ -22,7 +22,7 @@
 /* B.Benner Moehwald GmbH                                                         */
 /**********************************************************************************/
 
-// #include <conio.h>      //sb
+
 
 
 #include "ethercatslave.h"
@@ -96,17 +96,18 @@ rpi_base::rpi_base()
   m_count = 0;
   m_laststart = 0;
 	m_lastruntime = 0; 
-  m_hwif = NULL;
-  // m_hwif = new CLAN9252(SPI_Address);                                          
+//m_hwif = NULL;
+//m_hwif = new CLAN9252(SPI_Address);                                          
 }
 
 rpi_base::~rpi_base()
 {
-  if (m_hwif)
-    {
+/*  if (m_hwif)                   // When different shield version is integrated
+    {                             // can be uncommented
       delete m_hwif;
       m_hwif=NULL;
     }
+    */
 }
 
 
@@ -154,14 +155,11 @@ int rpi_base::isrealtime()
    if (len > 0)
    {
     strip(&buffer[0]);
-      isreal = (strcmp(&buffer[0], "1"));
-     if (isreal != 0)
+     isreal = (strcmp(&buffer[0], "1")==0);
+     if (isreal)
       {
-        err = -5;
-      }
-      else{
         err = mlockall(MCL_CURRENT | MCL_FUTURE);
-        }
+      }
     }
     
     return err;
@@ -182,11 +180,12 @@ unsigned char rpi_base::SPI_Read(unsigned char Data)
 };
 
 
+////
 /// Output buffer queue
-void rpi_base::send_output(const unsigned long long* source,size_t numlongs)
+void rpi_base::send_output(const unsigned long long* source)
 {
             
-      for (unsigned long i=0; i<(sizeof(BufferIn)/sizeof(BufferIn.ul[0])); i++)
+      for (unsigned long i=0; i<(sizeof(BufferIn.ul)/sizeof(BufferIn.ul[0])); i++)
          {                                                // the input buffer
              fromSlaveBufferIn[m_curqidx].ul[i] = *source;   // atomic copy
              source++;
@@ -242,30 +241,22 @@ unsigned char rpi_base::MainTask()                           /// must be called 
   else                                                      // set/reset the corrisponding flag
     Operational = 0;                                        //    
 
-  
-
-                                                            //--- process data transfert ----------
+                                                             //--- process data transfert ----------
                                                             //                                                        
   if (WatchDog | !Operational)                              // if watchdog is active or we are 
   {                                                         // not in operational state, reset 
-    for (i=0; i<4; i++)  {                                  // the output buffer
+    for (i=0; i<4; i++)  {                                  // the input buffer
     BufferOut.ul[i] = 0;                                    //
     }   
   }
-  else                                                      
+  else
   {                                                         
     SPIReadProcRamFifo();                                   // otherwise transfer process data from 
   }                                                         // the EtherCAT core to the output buffer  
   
-  
-  
+ 
   SPIWriteProcRamFifo();                                    // we always transfer process data from
                                                             // the input buffer to the EtherCAT core  
-
-                 
-  SPIReadProcRamFifo();                                    /// otherwise transfer process data from 
-  
-  
 
   if (WatchDog)                                             // return the status of the State Machine      
   {                                                         // and of the watchdog
@@ -488,8 +479,7 @@ int rpi_base::milisleep(long long miliseconds)
 void rpi_base::bashoutput(){                  // replace it with vt100!!!
   outbuffer[sizeof(outbuffer)-1]=0;         
   numeric[sizeof(numeric)-1]=0;
-  outbuffer[0]=0;
-	
+  
  /* 
   strncat(&outbuffer[0],"Out rpi:",sizeof(outbuffer)-1);
   for(int i=0; i<4; i++) {
@@ -523,7 +513,7 @@ void rpi_base::bashoutput(){                  // replace it with vt100!!!
 
   
   snprintf(&numeric[0],sizeof(numeric)-1,"%f",m_period.sbuf.vmean);
-  strncat(&outbuffer[0],"period(ms):",sizeof(outbuffer)-1);
+  strncpy(&outbuffer[0],"period(ms):",sizeof(outbuffer)-1);
   strncat(&outbuffer[0],&numeric[0],sizeof(outbuffer)-1);
   
   snprintf(&numeric[0],sizeof(numeric)-1,"%f",m_period.sbuf.vrange);

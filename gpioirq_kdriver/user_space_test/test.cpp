@@ -7,7 +7,7 @@
 #include <pthread.h>
 #include <linux/gpio.h>
 
-#include "/projects/etherslave/etherberry_9252/include/gpioirq/gpioirq.h"
+#include "../../include/gpioirq/gpioirq.h"
 
 
 

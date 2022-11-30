@@ -90,7 +90,8 @@ static void r_int_release(MYCONTEXT* md) {
 }
 
 
-/// Activates the interrupt with different orders that comes from user space
+/// API that makes the comm. between kernel and user space
+///  with different orders
 static int my_api(unsigned int cmd, MYCONTEXT* md,unsigned long arg)
 {
   int err;
@@ -155,7 +156,7 @@ static int my_api(unsigned int cmd, MYCONTEXT* md,unsigned long arg)
 }
 
 
-#define DBG_OUT
+//#define DBG_OUT
 
 
 //********************************************************************************
@@ -244,7 +245,7 @@ static int driver_close (struct inode *device_file, struct file *instance)
 
    MYCONTEXT* md;
    
-   md=(MYCONTEXT*)(instance->private_data);        //??
+   md=(MYCONTEXT*)(instance->private_data);        
 
    printk("Close was called! \n");
 

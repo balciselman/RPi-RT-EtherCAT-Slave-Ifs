@@ -1,4 +1,4 @@
-/*! \file cspitarget.h
+/*! \file rpi_base.h
     \brief Header file of the system.
 */
 
@@ -6,7 +6,7 @@
  #define __RPI_BASE_H
 
 
-extern FILE* stream;         // why is this here??
+extern FILE* stream;         
 
 //!@{
 //! LAN9252 Datasheet TABLE 5-1: SYSTEM CONTROL AND STATUS REGISTERS 
@@ -271,7 +271,7 @@ typedef union
  *
  * This class differentiates EtherCAT chips for future implementations
 */
-class CLAN9252;
+// class CLAN9252;
 
 
 /// Inline function to get current monotonic time
@@ -310,7 +310,7 @@ class rpi_base
 	static int _kbhit();											///< Keyboard utilities
 	static int utl_kbkey ();										///< Keyboard utilities
 	
-	void send_output(const unsigned long long* source,size_t numlongs); ///< Sends the output buffer
+	void send_output(const unsigned long long* source); ///< Sends the output buffer
   	void receive_input(PROCBUFFER* pBufferOut); 					///< Pulls the data
 
 	//void inputbuffer();			delete it									///< Input buffer called cyclically in the main
@@ -323,8 +323,8 @@ class rpi_base
 	char outbuffer[256];											///< Buffer for bash output
 	char numeric[64];												///< For bash
 
-	unsigned int m_curqidx;											///< next index for input from slave
-	unsigned int m_curqoutidx;										///< update index for spi output
+	volatile unsigned int m_curqidx;											///< next index for input from slave
+	volatile unsigned int m_curqoutidx;										///< update index for spi output
 
 
 	PROCBUFFER m_BufferOutEthToSlaveBuffer;
@@ -359,8 +359,7 @@ class rpi_base
 
 
    private:
-    CLAN9252*     m_hwif;                 // !!
-    
+  //  CLAN9252*     m_hwif;                 // !!
     void          SPIReadProcRamFifo();    							///< Read from process ram fifo
     void          SPIWriteProcRamFifo();   							///< Write to the process ram fifo
 

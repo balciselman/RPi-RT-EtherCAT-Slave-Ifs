@@ -34,7 +34,7 @@
 /// Interrupt number for the LAN9252 Microchip
 #define GPIO_ANY_GPIO                25
 
-/// text below will be seen in 'cat /proc/interrupt' command
+/// text below will be seen in 'cat /proc/interrupts' command
 #define GPIO_ANY_GPIO_DESC           "Sync Test Irq"
 #define GPIO_ANY_GPIO_DEVICE_DESC    "Raspberry Pi 4B"
 
@@ -68,11 +68,12 @@ static inline int get_arginput(void *arg,void *dest,size_t size)
 }
 #endif
 
+#if defined(KERNEL_SPACE)
 
 static long driver_unioctl (struct file *file, unsigned int cmd, unsigned long arg);
 static  __inline int down_timeoutms(struct semaphore *sem,long timeout_ms);
 
-
+#endif
 
 
 
