@@ -557,7 +557,7 @@ int rtthread::get_nextcpu()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-basemutex::basemutex(const char* name) //: CRTCLASS_sysbaseobject(name, objtyp)
+basemutex::basemutex(const char* name) 
 {
    m_name=new char[strlen(name)+1];
    strcpy(&m_name[0],name);
@@ -669,7 +669,7 @@ void mutex::reset()
 
 // Thread
 
-// Priority set to 98!
+
 	rttestthread::rttestthread(etherberry_9252* device) : rtthread("rttestthread",88,NULL,-1,false,0)
 	{
       m_device=device;
