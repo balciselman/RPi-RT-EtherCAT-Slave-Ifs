@@ -27,7 +27,7 @@ With the hardware ready the program can be runned easily.
 ```
 git clone https://github.com/balciselman/RPi-RT-EtherCAT-Slave-Ifs.git
 make
-./ethercateslaveif
+./ethercatslaveif
 ```
 
 
