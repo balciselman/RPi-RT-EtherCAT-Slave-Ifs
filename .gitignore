@@ -73,7 +73,7 @@ external/*/
 /doxydoc/html/
 /**/obj/
 ethercatslaveif
-
+.DS_Store
 
 
 

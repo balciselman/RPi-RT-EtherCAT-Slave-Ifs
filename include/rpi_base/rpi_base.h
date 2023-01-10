@@ -255,11 +255,11 @@ typedef union
 } ULONG;
 
 /*! \typedef PROCBUFFER
-*   \brief Union for 32 Bytes used for Buffers
+*   \brief Union for 32 Bytes used for Buffer
 */
 typedef union
 {
-   unsigned char Byte [32];    
+   unsigned char Byte [32];   // 32 x 8 bit 
    unsigned int ui[8];        // 8 x 32 bit
    unsigned long long ul[4];  // 4 x 64 bit
         
